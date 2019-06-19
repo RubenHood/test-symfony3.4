@@ -5,11 +5,11 @@ namespace BlogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-
 /**
  * @Route("/name", name="name_")
  */
-class DefaultController extends Controller
+
+class BlogController extends Controller
 {
 
     /**
