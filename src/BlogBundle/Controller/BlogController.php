@@ -4,21 +4,34 @@ namespace BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
-/**
- * @Route("/name", name="name_")
- */
+use Symfony\Component\HttpFoundation\Response;
+use BlogBundle\Entity\Post;
 
 class BlogController extends Controller
 {
 
     /**
-     * @Route("/")
+     * @Route("/add")
      */
 
-    public function indexAction()
+    public function addAction()
     {
-        //cambiar esto que viene por default
-        return $this->render('@Blog/Default/index.html.twig');
+        
+        //recuperamos el entiti manager
+       $em = $this->getDoctrine()->getManager();
+
+       //creamos la entidad
+       $post = new Post();
+       $post->setTitle("Prueba");
+       $post->setBody("Es el cuerpo");
+       $post->setTag("untag");
+       $post->setCreateAt(\Date::now());
+       $post->setIduser(1);
+
+       //presistimos la entidad
+       $em->persist($post);
+       $em->flush();
+       
+       return new Response("Retorno post creado ->".$post->getId());
     }
 }

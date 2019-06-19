@@ -6,19 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 
-/**
- * @Route("/name", name="name_")
- */
 class DefaultController extends Controller
 {
-
     /**
      * @Route("/")
      */
-
     public function indexAction()
     {
-        //cambiar esto que viene por default
-        return $this->render('@Blog/Default/index.html.twig');
+        return $this->render('@Blog/Default/index.html.twig', array(
+            // ...
+        ));
     }
 }
