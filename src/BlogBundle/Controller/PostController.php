@@ -57,5 +57,51 @@ class PostController extends Controller
         return $this->render("@Blog/Default/Posts.html.twig", ["posts" => $posts]);
     }
 
+    /**
+     * @Route("/find/{id}")
+     */
+
+    public function getPostById($id)
+    {
+
+        //recuperamos el entiti manager
+        $em = $this->getDoctrine()->getManager();
+
+        //obtenemos la referencia al repositorio
+        $repository = $em->getRepository("BlogBundle:Post");
+
+        $post = $repository->find($id);
+
+        return $this->render("@Blog/Default/formpost.html.twig", ["post" => $post]);
+    }
+
+    /**
+     * @Route("/update/{id}")
+     */
+
+    public function updatePost($id)
+    {
+
+        //recuperamos el entiti manager
+        $em = $this->getDoctrine()->getManager();
+
+        //obtenemos la referencia al repositorio
+        $repository = $em->getRepository("BlogBundle:Post");
+
+        $post = $repository->find($id);
+
+        $post->setTitle("sadfasdf");
+        $post->setBody("asfasdf");
+        $post->setTag("asdfsadf");
+        $post->setCreateAt(new \DateTime('now'));
+        $post->setIduser(1);
+
+        //presistimos la entidad
+        $em->persist($post);
+        $em->flush();
+
+        return $this->render("@Blog/Default/formpost.html.twig", ["post" => $post]);
+    }
+
     
 }
