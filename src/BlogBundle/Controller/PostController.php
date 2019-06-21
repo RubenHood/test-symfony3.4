@@ -93,10 +93,10 @@ class PostController extends Controller
         $post->setIduser(1);
 
         //presistimos la entidad
-        $em->persist($post);
         $em->flush();
 
-        return $this->render("@Blog/Default/formpost.html.twig", ["post" => $post]);
+        //mandamos a mostrar todos los posts
+        return $this->redirect('/blog/post/getAll');
     }
 
     /**
@@ -129,8 +129,8 @@ class PostController extends Controller
         $repository = $em->getRepository("BlogBundle:Post");
 
         //creamos la query
-        $query = $repository->createQueryBuilder()
-                    ->where('p.title LIKE :title')
+        $query = $repository->createQueryBuilder('a')
+                    ->where('a.title LIKE :title')
                     ->setParameter('title','%'.$title.'%')
                     ->getQuery();
 
@@ -139,6 +139,27 @@ class PostController extends Controller
         return $this->render("@Blog/Default/Posts.html.twig", ["posts" => $posts]);
     }
 
-    
+    /**
+     * @Route("/delete/{id}")
+     */
+    public function deletePost($id)
+    {
+
+        //recuperamos el entiti manager
+        $em = $this->getDoctrine()->getManager();
+
+        //obtenemos la referencia al repositorio
+        $repository = $em->getRepository("BlogBundle:Post");
+
+        //buscamos el post
+        $post = $repository->find($id);
+
+        //eliminamos y actualizamos
+        $em->remove($post);
+        $em->flush();
+
+        //mandamos a mostrar todos los posts
+        return $this->redirect('/blog/post/getAll');
+    }
     
 }

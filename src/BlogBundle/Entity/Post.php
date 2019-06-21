@@ -43,25 +43,24 @@ class Post
     private $tag;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="iduser", type="integer")
+     *@ORM\ManyToOne(targetEntity="User", inversedBy="posts")
+     *@ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $iduser;
+    private $user;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="create_at", type="datetime")
+     * @ORM\Column(name="createat", type="datetime")
      */
-    private $createAt;
+    private $createat;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="update_at", type="datetime", nullable=true)
+     * @ORM\Column(name="updateat", type="datetime", nullable=true)
      */
-    private $updateAt;
+    private $updateat;
 
 
     /**
@@ -122,76 +121,53 @@ class Post
         return $this->body;
     }
 
+
     /**
-     * Set iduser
+     * Set createat
      *
-     * @param integer $iduser
+     * @param \DateTime $createat
      *
      * @return Post
      */
-    public function setIduser($iduser)
+    public function setCreateat($createat)
     {
-        $this->iduser = $iduser;
+        $this->createat = $createat;
 
         return $this;
     }
 
     /**
-     * Get iduser
-     *
-     * @return int
-     */
-    public function getIduser()
-    {
-        return $this->iduser;
-    }
-
-    /**
-     * Set createAt
-     *
-     * @param \DateTime $createAt
-     *
-     * @return Post
-     */
-    public function setCreateAt($createAt)
-    {
-        $this->createAt = $createAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createAt
+     * Get createat
      *
      * @return \DateTime
      */
-    public function getCreateAt()
+    public function getCreateat()
     {
-        return $this->createAt;
+        return $this->createat;
     }
 
     /**
-     * Set updateAt
+     * Set updateat
      *
-     * @param \DateTime $updateAt
+     * @param \DateTime $updateat
      *
      * @return Post
      */
-    public function setUpdateAt($updateAt)
+    public function setUpdateat($updateat)
     {
-        $this->updateAt = $updateAt;
+        $this->updateat = $updateat;
 
         return $this;
     }
 
     /**
-     * Get updateAt
+     * Get updateat
      *
      * @return \DateTime
      */
-    public function getUpdateAt()
+    public function getUpdateat()
     {
-        return $this->updateAt;
+        return $this->updateat;
     }
 
     /**
@@ -216,5 +192,29 @@ class Post
     public function getTag()
     {
         return $this->tag;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \BlogBundle\Entity\User $user
+     *
+     * @return Post
+     */
+    public function setUser(\BlogBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \BlogBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
