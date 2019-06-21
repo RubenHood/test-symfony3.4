@@ -115,5 +115,30 @@ class PostController extends Controller
 
         return $this->render("@Blog/Default/Posts.html.twig", ["posts" => $posts]);
     }
+
+    /**
+     * @Route("/findquery/{title}")
+     */
+    public function findByQuery($title)
+    {
+
+        //recuperamos el entiti manager
+        $em = $this->getDoctrine()->getManager();
+
+        //obtenemos la referencia al repositorio
+        $repository = $em->getRepository("BlogBundle:Post");
+
+        //creamos la query
+        $query = $repository->createQueryBuilder()
+                    ->where('p.title LIKE :title')
+                    ->setParameter('title','%'.$title.'%')
+                    ->getQuery();
+
+        $posts = $query->getResult();
+
+        return $this->render("@Blog/Default/Posts.html.twig", ["posts" => $posts]);
+    }
+
+    
     
 }
