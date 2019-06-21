@@ -13,11 +13,10 @@ use BlogBundle\Entity\Post;
 
 class PostController extends Controller
 {
-
+    
     /**
      * @Route("/add")
      */
-
     public function addAction()
     {
 
@@ -42,7 +41,6 @@ class PostController extends Controller
     /**
      * @Route("/getAll")
      */
-
     public function getAllAction()
     {
 
@@ -60,7 +58,6 @@ class PostController extends Controller
     /**
      * @Route("/find/{id}")
      */
-
     public function getPostById($id)
     {
 
@@ -78,7 +75,6 @@ class PostController extends Controller
     /**
      * @Route("/update/{id}")
      */
-
     public function updatePost($id)
     {
 
@@ -103,5 +99,21 @@ class PostController extends Controller
         return $this->render("@Blog/Default/formpost.html.twig", ["post" => $post]);
     }
 
+    /**
+     * @Route("/findtitle/{title}")
+     */
+    public function findByTitle($title)
+    {
+
+        //recuperamos el entiti manager
+        $em = $this->getDoctrine()->getManager();
+
+        //obtenemos la referencia al repositorio
+        $repository = $em->getRepository("BlogBundle:Post");
+
+        $posts = $repository->findByTitle($title);
+
+        return $this->render("@Blog/Default/Posts.html.twig", ["posts" => $posts]);
+    }
     
 }
