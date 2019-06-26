@@ -39,7 +39,7 @@ class Post
     private $tag;
     /**
      *@ORM\ManyToOne(targetEntity="User", inversedBy="posts")
-     *@ORM\JoinColumn(name="user_id", referencedColumnName="id") 
+     *@ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL") 
      */
     private $user;
     /**
