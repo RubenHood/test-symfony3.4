@@ -19,17 +19,21 @@ class PostController extends Controller
      */
     public function addAction()
     {
-
         //recuperamos el entiti manager
         $em = $this->getDoctrine()->getManager();
 
+        $repository = $em->getRepository('BlogBundle:User');
+
+        //Creamos usuario
+        $user = $repository->find(1);
+
         //creamos la entidad
         $post = new Post();
-        $post->setTitle("Prueba");
+        $post->setTitle("Prueba con Cristian");
         $post->setBody("Es el cuerpo");
         $post->setTag("untag");
         $post->setCreateAt(new \DateTime('now'));
-        $post->setIduser(1);
+        $post->setUser($user);
 
         //presistimos la entidad
         $em->persist($post);

@@ -1,5 +1,4 @@
 <?php
-
 namespace BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -20,49 +19,41 @@ class Post
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=120)
      */
     private $title;
-
     /**
      * @var string
      *
      * @ORM\Column(name="body", type="string", length=255)
      */
     private $body;
-
     /**
      * @var string
      *
      * @ORM\Column(name="tag", type="string", length=50)
      */
     private $tag;
-
     /**
      *@ORM\ManyToOne(targetEntity="User", inversedBy="posts")
-     *@ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *@ORM\JoinColumn(name="user_id", referencedColumnName="id") 
      */
     private $user;
-
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createat", type="datetime")
+     * @ORM\Column(name="create_at", type="datetime")
      */
-    private $createat;
-
+    private $createAt;
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updateat", type="datetime", nullable=true)
+     * @ORM\Column(name="update_at", type="datetime", nullable=true)
      */
-    private $updateat;
-
-
+    private $updateAt;
     /**
      * Get id
      *
@@ -72,7 +63,6 @@ class Post
     {
         return $this->id;
     }
-
     /**
      * Set title
      *
@@ -83,10 +73,8 @@ class Post
     public function setTitle($title)
     {
         $this->title = $title;
-
         return $this;
     }
-
     /**
      * Get title
      *
@@ -96,7 +84,6 @@ class Post
     {
         return $this->title;
     }
-
     /**
      * Set body
      *
@@ -107,10 +94,8 @@ class Post
     public function setBody($body)
     {
         $this->body = $body;
-
         return $this;
     }
-
     /**
      * Get body
      *
@@ -120,56 +105,48 @@ class Post
     {
         return $this->body;
     }
-
-
     /**
-     * Set createat
+     * Set createAt
      *
-     * @param \DateTime $createat
+     * @param \DateTime $createAt
      *
      * @return Post
      */
-    public function setCreateat($createat)
+    public function setCreateAt($createAt)
     {
-        $this->createat = $createat;
-
+        $this->createAt = $createAt;
         return $this;
     }
-
     /**
-     * Get createat
+     * Get createAt
      *
      * @return \DateTime
      */
-    public function getCreateat()
+    public function getCreateAt()
     {
-        return $this->createat;
+        return $this->createAt;
     }
-
     /**
-     * Set updateat
+     * Set updateAt
      *
-     * @param \DateTime $updateat
+     * @param \DateTime $updateAt
      *
      * @return Post
      */
-    public function setUpdateat($updateat)
+    public function setUpdateAt($updateAt)
     {
-        $this->updateat = $updateat;
-
+        $this->updateAt = $updateAt;
         return $this;
     }
-
     /**
-     * Get updateat
+     * Get updateAt
      *
      * @return \DateTime
      */
-    public function getUpdateat()
+    public function getUpdateAt()
     {
-        return $this->updateat;
+        return $this->updateAt;
     }
-
     /**
      * Set tag
      *
@@ -180,10 +157,8 @@ class Post
     public function setTag($tag)
     {
         $this->tag = $tag;
-
         return $this;
     }
-
     /**
      * Get tag
      *
@@ -193,7 +168,6 @@ class Post
     {
         return $this->tag;
     }
-
     /**
      * Set user
      *
@@ -204,10 +178,8 @@ class Post
     public function setUser(\BlogBundle\Entity\User $user = null)
     {
         $this->user = $user;
-
         return $this;
     }
-
     /**
      * Get user
      *
