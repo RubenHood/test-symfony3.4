@@ -5,19 +5,25 @@ namespace BlogBundle\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use BlogBundle\Entity\Post;
+use Faker\Factory;
+
 
 class AppFixture extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $post = new Post();
-        $post->setTitle("PruebaFixture");
-        $post->setBody("prueba");
-        $post->setTag("Ciencia");
-        $post->setCreateAt(new \DateTime('now'));
+        //creamos un objeto faker
+        $faker = Factory::create();
 
-
-        $manager->persist($post);
-        $manager->flush();
+        for($i=0; $i<200; $i++){
+            $post = new Post();
+            $post->setTitle($faker->sentence($nbWords = 6, $variableNbWords = true));
+            $post->setBody($faker->paragraph($nbSentences = 2, $variableNbSentences = true));
+            $post->setTag("Ciencia");
+            $post->setCreateAt(new \DateTime('now'));
+    
+            $manager->persist($post);
+            $manager->flush();
+        }
     }
 }
